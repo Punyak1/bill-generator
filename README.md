@@ -1,5 +1,5 @@
 # BillGenerator
-Generate pdf from frontend application served from browser
+Generate pdf from frontend application served from browser/electron
 
 # Steps to generate executable file
 1. ng build --configuration production
