@@ -1,0 +1,191 @@
+<!-- Input Form -->
+<form #invoiceForm="ngForm" (ngSubmit)="onSubmit(invoiceForm)" *ngIf="!formSubmitted">
+    <div class="form-group">
+      <label>Guest Name:</label>
+      <input name="guestName" [(ngModel)]="guestName" required />
+    </div>
+
+    <div class="form-group">
+      <label>Guest Mobile:</label>
+      <input name="guestMobile" [(ngModel)]="guestMobile" required />
+    </div>
+
+    <div class="form-group">
+      <label for="guestEmail">Guest Email:</label>
+      <input name="guestEmail" [(ngModel)]="guestEmail" required placeholder="guest@example.com"/>
+    </div>
+
+    <div class="form-group row-pair">
+      <div class="form-half">
+        <label>Check-In Date:</label>
+        <input type="date" name="checkInDate" [(ngModel)]="checkInDate" required />
+      </div>
+      <div class="form-half">
+        <label>Check-In Time:</label>
+        <input type="time" [(ngModel)]="checkInTime" name="checkInTime" required />
+      </div>
+    </div>
+
+    <div class="form-group row-pair">
+      <div class="form-half">
+        <label>Check-Out Date:</label>
+        <input type="date" name="checkOut" [(ngModel)]="checkOutDate" required />
+      </div>
+      <div class="form-half">
+        <label>Check-Out Time:</label>
+        <input type="time" name="checkOut" [(ngModel)]="checkOutTime" required />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Room Type:</label>
+      <input name="roomType" [(ngModel)]="roomType" required list="roomTypeSuggestion"/>
+        <datalist id="roomTypeSuggestion">
+        <option value="Deluxe"></option>
+        <option value="Semi Deluxe"></option>
+        </datalist>
+    </div>
+
+    <div class="form-group">
+      <label>Price (Without Tax):</label>
+      <input type="number" name="taxable" [(ngModel)]="taxable" required list="priceSuggestion"/>
+        <datalist id="priceSuggestion">
+        <option value=1800></option>
+        <option value=2200></option>
+        </datalist>
+    </div>
+
+
+    <div class="form-group">
+      <label>Invoice Date:</label>
+      <input type="date" name="invoiceDate" [(ngModel)]="invoiceDate" required />
+    </div>
+
+    <div class="form-group">
+      <label>Number of Rooms:</label>
+      <input type="number" name="numberOfRooms" [(ngModel)]="numberOfRooms" required />
+    </div>
+
+    <div class="form-group">
+      <label>Number of Nights:</label>
+      <input type="number" name="numberOfNights" [(ngModel)]="numberOfNights" required />
+    </div>
+
+    <div class="form-group">
+      <label>Number of Adults:</label>
+      <input type="number" name="numberOfAdults" [(ngModel)]="numberOfAdults" required />
+    </div>
+
+    <div class="form-group">
+      <label>Number of Children:</label>
+      <input type="number" name="numberOfChildren" [(ngModel)]="numberOfChildren" required />
+    </div>
+
+    <div class="form-group">
+      <label>Room Number:</label>
+      <input type="text" name="roomNumber" [(ngModel)]="roomNumber" required />
+    </div>
+
+    <div class="form-group">
+      <label>Source:</label>
+      <select name="source" [(ngModel)]="source" required>
+        <option value="" disabled selected>Select source</option>
+        <option value="Direct - Walk-In">Direct - Walk-In</option>
+        <option value="Online">Online</option>
+        <option value="Agent">Agent</option>
+        <option value="Phone Booking">Phone Booking</option>
+      </select>
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+  
+  <!-- Invoice Preview -->
+  <div #billContent class="invoice-box" *ngIf="formSubmitted">
+    <div class="header-section">
+      <div class="logo-container">
+        <img src="logo.png" alt="ShreeSaiLawns" class="logo-thumbnail" />
+      </div>
+      <h1 class="property-name">SHRI SAI LAWNS</h1>
+      <p class="company-sub">A Unit of "SHRI SAI ENTERPRISES"</p>
+      <p class="address">Near Sai Mandir, Kodesia Fatak, Bareilly</p>
+      <p>Email: <a href="mailto:shreesailawns@gmail.com">shreesailawns&#64;gmail.com</a> | Phone: 8650063111</p>
+      <p>GST No: 09ADRFS4094E1ZJ | State Code: 09 | Place of Supply: Uttar Pradesh</p>
+      <p>GST Tax Invoice: {{ invoiceNumber }} | Invoice Date: {{ invoiceDate }}</p>
+      <hr class="section-divider" />
+    </div>
+
+
+    <div class="info-section">
+      <div class="left">
+        <h4>Guest Information:</h4>
+        <p><strong>Guest Name:</strong> {{ guestName }}</p>
+        <p><strong>Guest Email:</strong> {{guestEmail}}</p>
+        <p><strong>Guest Mobile:</strong> {{ guestMobile }}</p>
+        <p><strong>Source:</strong> {{ source }}</p>
+        <p><strong>Check-In:</strong> {{ checkInDate }} {{ checkInTime }}</p>
+        <p><strong>Check-Out:</strong> {{ checkOutDate }} {{ checkOutTime }}</p>
+      </div>
+
+      <div class="right">
+        <h4>Booking Information:</h4>
+        <p><strong>Booking ID:</strong> {{bookingId}}</p>
+        <p><strong>Room Type:</strong> {{ roomType }}</p>
+        <p><strong>Room No:</strong> {{ roomNumber }}</p>
+        <p><strong>Number Of Nights:</strong> {{ numberOfNights }}</p>
+        <p><strong>Number Of Rooms:</strong> {{ numberOfRooms }}</p>
+        <p><strong>Number Of Adults:</strong> {{ numberOfAdults }}</p>
+        <p><strong>Number Of Children:</strong> {{ numberOfChildren }}</p>
+
+      </div>
+    </div>
+
+    <hr class="section-divider" style="border-top:dotted;"/>
+
+  
+    <table class="charges">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Description</th>
+          <th>HSN/SAC Code</th>
+          <th>Date</th>
+          <th>Taxable Value</th>
+          <th>CGST (6%)</th>
+          <th>SGST (6%)</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>{{ roomType }}</td>
+          <td>996311</td>
+          <td>{{ invoiceDate }}</td>
+          <td>₹{{ taxable }}</td>
+          <td>₹{{ cgst }} </td>
+          <td>₹{{ sgst }} </td>
+          <td>₹{{ total }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="summary">
+    <tr><td><strong>Taxable Amount</strong></td><td>₹{{ taxable }}</td></tr>
+    <tr><td><strong>CGST (6%)</strong></td><td>₹{{ cgst }}</td></tr>
+    <tr><td><strong>SGST (6%)</strong></td><td>₹{{ sgst }}</td></tr>
+    <tr><td><strong>Grand Total</strong></td><td>₹{{ total }}</td></tr>
+    <tr><td><strong>Received Amount</strong></td><td>₹{{ total }}</td></tr>
+    </table>
+  
+    <hr class="section-divider" />
+
+    <div class="footer-note">
+      <p>This is an auto generated copy, doesn't require any signature. Invoice number is self-generated under GST compliance. </p>
+      <p>All Dispute subject to Jurisdiction of Bareilly, Uttar Pradesh Only.</p>
+      <p><strong>Bill To:</strong> Guest &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Duty Manager:</strong> Rajeev Jauhari</p>
+    </div>
+  </div>
+  
+  <!-- Download Button -->
+  <button (click)="generatePDF()" *ngIf="formSubmitted">Download PDF</button>
