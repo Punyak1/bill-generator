@@ -51,6 +51,7 @@ out-tsc/
 out/
 build/
 dist/
+dist-electron/
 release/
 *.exe
 *.dll
