@@ -46,14 +46,14 @@
         </datalist>
     </div>
 
-    <div class="form-group">
-      <label>Price (Without Tax):</label>
-      <input type="number" name="taxable" [(ngModel)]="taxable" required list="priceSuggestion"/>
-        <datalist id="priceSuggestion">
-        <option value=1800></option>
-        <option value=2200></option>
-        </datalist>
-    </div>
+  <div class="form-group">
+    <label>Total Amount (Incl. GST):</label>
+    <input type="number" name="total" [(ngModel)]="total" required list="totalSuggestion"/>
+    <datalist id="totalSuggestion">
+      <option value="1800"></option>
+      <option value="2200"></option>
+    </datalist>
+  </div>
 
 
     <div class="form-group">
@@ -79,6 +79,15 @@
     <div class="form-group">
       <label>Number of Children:</label>
       <input type="number" name="numberOfChildren" [(ngModel)]="numberOfChildren" required />
+    </div>
+
+    <div class="form-group">
+      <label>Additional Guest Amenities:</label>
+      <input name="amenities" [(ngModel)]="amenities" list="AmenitiesSuggestion" required />
+      <datalist id="AmenitiesSuggestion">
+      <option value="No"></option>
+      <option value="Extra Bedding"></option>
+      </datalist>
     </div>
 
     <div class="form-group">
@@ -125,6 +134,7 @@
         <p><strong>Source:</strong> {{ source }}</p>
         <p><strong>Check-In:</strong> {{ checkInDate }} {{ checkInTime }}</p>
         <p><strong>Check-Out:</strong> {{ checkOutDate }} {{ checkOutTime }}</p>
+        <p><strong>Additional Amenities:</strong> {{ amenities }}</p>
       </div>
 
       <div class="right">

@@ -29,10 +29,11 @@ export class BillComponent {
   invoiceDate = '';
   invoiceNumber = '';
   bookingId = '';
-  cgst = 0;
-  sgst = 0;
-  total = 0;
-  taxable = 1800;
+  amenities = '';
+  cgst = 0.00;
+  sgst = 0.00;
+  total = 0.00;
+  taxable = 0.00;
   numberOfRooms = 1;
   numberOfNights = 1;
   numberOfAdults = 2;
@@ -52,11 +53,13 @@ export class BillComponent {
   }
 
   calculateGST() {
-    const rate = 0.06; // 6% CGST + 6% SGST
-    this.taxable= Number(this.taxable) || 0;
-    this.cgst = +(this.taxable * rate).toFixed(2);
-    this.sgst = +(this.taxable * rate).toFixed(2);
-    this.total = +(this.taxable + this.cgst + this.sgst).toFixed(2);
+    const rate = 1.12; // 6% CGST + 6% SGST
+    this.total = (Number(this.total) || 0);
+    const val = this.total/rate;
+    this.cgst = parseFloat(((this.total-val)/2).toFixed(2));
+    this.sgst = this.cgst;
+    this.total = parseFloat(this.total.toFixed(2));
+    this.taxable = parseFloat((this.total-this.cgst-this.sgst).toFixed(2));
   }
 
   onSubmit(form: NgForm) {
