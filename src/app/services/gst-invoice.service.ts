@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 
 export class GstInvoiceService {
-  private prefix = 'SSL'; // Change this as needed
+  private prefix = 'SSL/E'; // Change this as needed
   private currentNumber = 1018;    // You could load this from a backend in real-world apps
 
   constructor() {

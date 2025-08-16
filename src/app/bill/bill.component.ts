@@ -20,46 +20,28 @@ export class BillComponent {
   guestName = '';
   guestEmail = '';
   guestMobile = '';
-  checkInDate = '';
-  checkInTime = '';
-  checkOutDate = '';
-  checkOutTime = '';
-  roomType = '';
-  mealPlan = '';
+
+  event='';
   invoiceDate = '';
+  bookingDate = '';
   invoiceNumber = '';
-  bookingId = '';
-  amenities = '';
+  
   cgst = 0.00;
   sgst = 0.00;
   total = 0.00;
   taxable = 0.00;
-  numberOfRooms = 1;
-  numberOfNights = 1;
-  numberOfAdults = 2;
-  numberOfChildren = 0;
-  roomNumber = '';
-  source = 'Direct - Walk-In';
-
-  generateBookingId(): string {
-    const today = new Date();
-    const datePart = `${today.getFullYear()}${(today.getMonth()+1).toString().padStart(2, '0')}${today.getDate().toString().padStart(2, '0')}`;
-    
-    const stored = localStorage.getItem('bookingCounter');
-    let counter = stored ? parseInt(stored,10) + 1 : 1032;
-    localStorage.setItem('bookingCounter', counter.toString());
-
-    return `SSL/${datePart}/${counter.toString().padStart(6, '0')}`;
-  }
+  dueAmt = 0.00;
+  received = 0.00;
 
   calculateGST() {
-    const rate = 1.12; // 6% CGST + 6% SGST
+    const rate = 1.18; // 9% CGST + 9% SGST
     this.total = (Number(this.total) || 0);
     const val = this.total/rate;
     this.cgst = parseFloat(((this.total-val)/2).toFixed(2));
     this.sgst = this.cgst;
     this.total = parseFloat(this.total.toFixed(2));
     this.taxable = parseFloat((this.total-this.cgst-this.sgst).toFixed(2));
+    this.dueAmt = this.total - this.received;
   }
 
   onSubmit(form: NgForm) {
@@ -72,7 +54,6 @@ export class BillComponent {
       return; // Don't proceed if form is invalid
     }
 
-    this.bookingId = this.generateBookingId();
     this.invoiceNumber = this.gstInvoiceNo.generateInvoiceNumber();
     this.calculateGST();
     if (form.valid) {

@@ -15,95 +15,36 @@
       <input name="guestEmail" [(ngModel)]="guestEmail" required placeholder="guest@example.com"/>
     </div>
 
-    <div class="form-group row-pair">
-      <div class="form-half">
-        <label>Check-In Date:</label>
-        <input type="date" name="checkInDate" [(ngModel)]="checkInDate" required />
-      </div>
-      <div class="form-half">
-        <label>Check-In Time:</label>
-        <input type="time" [(ngModel)]="checkInTime" name="checkInTime" required />
-      </div>
-    </div>
-
-    <div class="form-group row-pair">
-      <div class="form-half">
-        <label>Check-Out Date:</label>
-        <input type="date" name="checkOut" [(ngModel)]="checkOutDate" required />
-      </div>
-      <div class="form-half">
-        <label>Check-Out Time:</label>
-        <input type="time" name="checkOut" [(ngModel)]="checkOutTime" required />
-      </div>
+    <div class="form-group">
+        <label>Booking Date:</label>
+        <input type="date" name="bookingDate" [(ngModel)]="bookingDate" required />
     </div>
 
     <div class="form-group">
-      <label>Room Type:</label>
-      <input name="roomType" [(ngModel)]="roomType" required list="roomTypeSuggestion"/>
-        <datalist id="roomTypeSuggestion">
-        <option value="Deluxe"></option>
-        <option value="Semi Deluxe"></option>
+      <label>Event:</label>
+      <input name="event" [(ngModel)]="event" required list="eventSuggestion"/>
+        <datalist id="eventSuggestion">
+        <option value="Marriage"></option>
+        <option value="Birthday"></option>
+        <option value="Engagement"></option>
+        <option value="Haldi"></option>
+        <option value="Mehendi"></option>
         </datalist>
     </div>
 
-  <div class="form-group">
-    <label>Total Amount (Incl. GST):</label>
-    <input type="number" name="total" [(ngModel)]="total" required list="totalSuggestion"/>
-    <datalist id="totalSuggestion">
-      <option value="1800"></option>
-      <option value="2200"></option>
-    </datalist>
-  </div>
+    <div class="form-group">
+      <label>Total Amount (Incl. GST):</label>
+      <input type="number" name="total" [(ngModel)]="total" required/>
+    </div>
 
+    <div class="form-group">
+      <label>Received Amount:</label>
+      <input type="number" name="received" [(ngModel)]="received" required/>
+    </div>
 
     <div class="form-group">
       <label>Invoice Date:</label>
       <input type="date" name="invoiceDate" [(ngModel)]="invoiceDate" required />
-    </div>
-
-    <div class="form-group">
-      <label>Number of Rooms:</label>
-      <input type="number" name="numberOfRooms" [(ngModel)]="numberOfRooms" required />
-    </div>
-
-    <div class="form-group">
-      <label>Number of Nights:</label>
-      <input type="number" name="numberOfNights" [(ngModel)]="numberOfNights" required />
-    </div>
-
-    <div class="form-group">
-      <label>Number of Adults:</label>
-      <input type="number" name="numberOfAdults" [(ngModel)]="numberOfAdults" required />
-    </div>
-
-    <div class="form-group">
-      <label>Number of Children:</label>
-      <input type="number" name="numberOfChildren" [(ngModel)]="numberOfChildren" required />
-    </div>
-
-    <div class="form-group">
-      <label>Additional Guest Amenities:</label>
-      <input name="amenities" [(ngModel)]="amenities" list="AmenitiesSuggestion" required />
-      <datalist id="AmenitiesSuggestion">
-      <option value="No"></option>
-      <option value="Extra Bedding"></option>
-      </datalist>
-    </div>
-
-    <div class="form-group">
-      <label>Room Number:</label>
-      <input type="text" name="roomNumber" [(ngModel)]="roomNumber" required />
-    </div>
-
-    <div class="form-group">
-      <label>Source:</label>
-      <select name="source" [(ngModel)]="source" required>
-        <option value="" disabled selected>Select source</option>
-        <option value="Direct - Walk-In">Direct - Walk-In</option>
-        <option value="Online">Online</option>
-        <option value="Agent">Agent</option>
-        <option value="Phone Booking">Phone Booking</option>
-      </select>
     </div>
 
     <button type="submit">Submit</button>
@@ -124,29 +65,18 @@
       <hr class="section-divider" />
     </div>
 
-
     <div class="info-section">
       <div class="left">
         <h4>Guest Information:</h4>
         <p><strong>Guest Name:</strong> {{ guestName }}</p>
         <p><strong>Guest Email:</strong> {{guestEmail}}</p>
         <p><strong>Guest Mobile:</strong> {{ guestMobile }}</p>
-        <p><strong>Source:</strong> {{ source }}</p>
-        <p><strong>Check-In:</strong> {{ checkInDate }} {{ checkInTime }}</p>
-        <p><strong>Check-Out:</strong> {{ checkOutDate }} {{ checkOutTime }}</p>
-        <p><strong>Additional Amenities:</strong> {{ amenities }}</p>
       </div>
 
       <div class="right">
         <h4>Booking Information:</h4>
-        <p><strong>Booking ID:</strong> {{bookingId}}</p>
-        <p><strong>Room Type:</strong> {{ roomType }}</p>
-        <p><strong>Room No:</strong> {{ roomNumber }}</p>
-        <p><strong>Number Of Nights:</strong> {{ numberOfNights }}</p>
-        <p><strong>Number Of Rooms:</strong> {{ numberOfRooms }}</p>
-        <p><strong>Number Of Adults:</strong> {{ numberOfAdults }}</p>
-        <p><strong>Number Of Children:</strong> {{ numberOfChildren }}</p>
-
+        <p><strong>Booking Date:</strong> {{bookingDate}}</p>
+        <p><strong>Event:</strong> {{ event }}</p>
       </div>
     </div>
 
@@ -161,16 +91,16 @@
           <th>HSN/SAC Code</th>
           <th>Date</th>
           <th>Taxable Value</th>
-          <th>CGST (6%)</th>
-          <th>SGST (6%)</th>
+          <th>CGST (9%)</th>
+          <th>SGST (9%)</th>
           <th>Total</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>1</td>
-          <td>{{ roomType }}</td>
-          <td>996311</td>
+          <td>{{ event }}</td>
+          <td>997212</td>
           <td>{{ invoiceDate }}</td>
           <td>₹{{ taxable }}</td>
           <td>₹{{ cgst }} </td>
@@ -182,10 +112,11 @@
 
     <table class="summary">
     <tr><td><strong>Taxable Amount</strong></td><td>₹{{ taxable }}</td></tr>
-    <tr><td><strong>CGST (6%)</strong></td><td>₹{{ cgst }}</td></tr>
-    <tr><td><strong>SGST (6%)</strong></td><td>₹{{ sgst }}</td></tr>
+    <tr><td><strong>CGST (9%)</strong></td><td>₹{{ cgst }}</td></tr>
+    <tr><td><strong>SGST (9%)</strong></td><td>₹{{ sgst }}</td></tr>
     <tr><td><strong>Grand Total</strong></td><td>₹{{ total }}</td></tr>
-    <tr><td><strong>Received Amount</strong></td><td>₹{{ total }}</td></tr>
+    <tr><td><strong>Received Amount</strong></td><td>₹{{ received }}</td></tr>
+    <tr><td><strong>Due Amount</strong></td><td>₹{{ dueAmt }}</td></tr>
     </table>
   
     <hr class="section-divider" />
